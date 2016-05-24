@@ -11,6 +11,9 @@ namespace SturmfreiInHogwarts
 {
     public partial class Form1 : Form
     {
+        private bool spielername1Ok = false;
+        private bool spielername2Ok = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,17 +38,25 @@ namespace SturmfreiInHogwarts
             lblSpielername1.Location = locationLblSpielername1;
             lblSpielername2.Location = locationLblSpielername2;
 
-            Point locationTbSpielername1 = new Point(locationLblSpielername1.X + lblSpielername2.Width + 10, locationLblSpielername1.Y);
+            Point locationTbSpielername1 = new Point(locationLblSpielername1.X + lblSpielername1.Width + 10, locationLblSpielername1.Y);
             Point locationTbSpielername2 = new Point(locationLblSpielername2.X + lblSpielername2.Width + 10, locationLblSpielername2.Y);
 
-            tbSpielername2.Location = locationTbSpielername1;
-            tbSpielername1.Location = locationTbSpielername2;
-            
-            Point localBtnStarteSpiel = new Point(locationLblSpielername1.X, locationTbSpielername2.Y + 50);
+            tbSpielername1.Location = locationTbSpielername1;
+            tbSpielername2.Location = locationTbSpielername2;
 
-            btnStarteSpiel.Location = localBtnStarteSpiel;
-            
-            tbSpielername2.Focus();
+            // Starte-Spiel-Button
+            btnStarteSpiel.Size = new System.Drawing.Size(lblSpielername1.Width + 10 + tbSpielername2.Width, 28);
+            Point locationBtnStarteSpiel = new Point(locationLblSpielername1.X, locationTbSpielername2.Y + 50);
+
+            btnStarteSpiel.Location = locationBtnStarteSpiel;
+
+            Point locationLblFehlerSpielerName1 = new Point(locationTbSpielername1.X + tbSpielername2.Width + 10, locationTbSpielername1.Y);
+            Point locationLblFehlerSpielerName2 = new Point(locationTbSpielername2.X + tbSpielername2.Width + 10, locationTbSpielername2.Y);
+
+            lblFehlerSpielername1.Location = locationLblFehlerSpielerName1;
+            lblFehlerSpielername2.Location = locationLblFehlerSpielerName2;
+
+            tbSpielername1.Focus();
         }
 
         public void zeigeSpielbrett()
@@ -59,27 +70,106 @@ namespace SturmfreiInHogwarts
             this.Height = spielbrettBitmap.Height + 70;
         }
 
-        private void tbSpielername2_TextChanged(object sender, EventArgs e)
-        {
-            if (tbSpielername2.Text != "" && tbSpielername1.Text != "")
-            {
-               if ((tbSpielername2.TextLength >= 3) && (tbSpielername1.TextLength >= 3))
-               {
-                    btnStarteSpiel.Enabled = true;
-               }
-            }
-        }
-
         private void btnStarteSpiel_Click(object sender, EventArgs e)
         {
             // Grafiken aus Menü verstecken
             lblSpielername2.Hide();
             lblSpielername1.Hide();
-            tbSpielername2.Hide();
             tbSpielername1.Hide();
+            tbSpielername2.Hide();
             btnStarteSpiel.Hide();
 
             zeigeSpielbrett();
         }
-   }
+
+        private void tbSpielername1_Leave(object sender, EventArgs e)
+        {
+            if (spielernameIstNichtLeer(tbSpielername1.Text))
+            {
+                if (!spielernameIstNichtZuKurz(tbSpielername1.Text))
+                {
+                    spielername1Ok = false;
+                    lblFehlerSpielername1.Text = "Zu kurz!";
+                }
+                else if (!spielernameIstNichtZuLang(tbSpielername1.Text))
+                {
+                    spielername1Ok = false;
+                    lblFehlerSpielername1.Text = "Zu lang!";
+                }
+                else
+                {
+                    spielername1Ok = true;
+                    lblFehlerSpielername1.Text = "";
+                }
+            }
+            else
+            {
+                spielername1Ok = false;
+            }
+
+            if (alleSpielerNamenOk())
+            {
+                btnStarteSpiel.Enabled = true;
+            }
+            else
+            {
+                btnStarteSpiel.Enabled = false;
+            }
+        }
+
+        private void tbSpielername2_Leave(object sender, EventArgs e)
+        {
+            if (spielernameIstNichtLeer(tbSpielername2.Text))
+            {
+                if (!spielernameIstNichtZuKurz(tbSpielername2.Text))
+                {
+                    spielername2Ok = false;
+                    lblFehlerSpielername2.Text = "Zu kurz!";
+                }
+                else if (!spielernameIstNichtZuLang(tbSpielername2.Text))
+                {
+                    spielername2Ok = false;
+                    lblFehlerSpielername2.Text = "Zu lang!";
+                }
+                else
+                {
+                    spielername2Ok = true;
+                    lblFehlerSpielername2.Text = "";
+                }
+            }
+            else
+            {
+                spielername2Ok = false;
+            }
+
+            if (alleSpielerNamenOk())
+            {
+                btnStarteSpiel.Enabled = true;
+            }
+            else
+            {
+                btnStarteSpiel.Enabled = false;
+            }
+        }
+
+        private bool spielernameIstNichtLeer(String spielername)
+        {
+            return spielername != "";
+        }
+
+        private bool spielernameIstNichtZuKurz(String spielername)
+        {
+            return spielername.Length >= 3;
+        }
+
+        private bool spielernameIstNichtZuLang(String spielername)
+        {
+            return spielername.Length <= 15;
+        }
+
+        private bool alleSpielerNamenOk()
+        {
+            return (spielername1Ok && spielername2Ok);
+        }
+    }
 }
