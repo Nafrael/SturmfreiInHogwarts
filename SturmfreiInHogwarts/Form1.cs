@@ -32,7 +32,7 @@ namespace SturmfreiInHogwarts
             this.Height = startmenueHintergrund.Height + 70;
 
             // spielernamen
-            Point locationLblSpielername1 = new Point((startmenueHintergrund.Width / 2) - lblSpielername1.Width - 10, startmenueHintergrund.Height / 2 - 50);
+            Point locationLblSpielername1 = new Point((startmenueHintergrund.Width / 2) - (lblSpielername1.Width / 2 + 10 + (tbSpielername1.Width / 2)), startmenueHintergrund.Height / 2 - 50);
             Point locationLblSpielername2 = new Point(locationLblSpielername1.X, locationLblSpielername1.Y + 50);
 
             lblSpielername1.Location = locationLblSpielername1;
@@ -55,6 +55,11 @@ namespace SturmfreiInHogwarts
 
             lblFehlerSpielername1.Location = locationLblFehlerSpielerName1;
             lblFehlerSpielername2.Location = locationLblFehlerSpielerName2;
+
+            // Titel
+            Point locationLblTitel = new Point((startmenueHintergrund.Width / 2) - (lblTitel.Width / 2), lblSpielername1.Location.Y - 100);
+
+            lblTitel.Location = locationLblTitel;
 
             tbSpielername1.Focus();
         }

@@ -36,6 +36,7 @@
             this.btnStarteSpiel = new System.Windows.Forms.Button();
             this.lblFehlerSpielername1 = new System.Windows.Forms.Label();
             this.lblFehlerSpielername2 = new System.Windows.Forms.Label();
+            this.lblTitel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -122,11 +123,22 @@
             this.lblFehlerSpielername2.Size = new System.Drawing.Size(0, 22);
             this.lblFehlerSpielername2.TabIndex = 7;
             // 
+            // lblTitel
+            // 
+            this.lblTitel.AutoSize = true;
+            this.lblTitel.Font = new System.Drawing.Font("Microsoft Sans Serif", 28F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitel.Location = new System.Drawing.Point(138, 107);
+            this.lblTitel.Name = "lblTitel";
+            this.lblTitel.Size = new System.Drawing.Size(493, 54);
+            this.lblTitel.TabIndex = 8;
+            this.lblTitel.Text = "Sturmfrei in Hogwarts";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(561, 446);
+            this.Controls.Add(this.lblTitel);
             this.Controls.Add(this.lblFehlerSpielername2);
             this.Controls.Add(this.lblFehlerSpielername1);
             this.Controls.Add(this.btnStarteSpiel);
@@ -154,6 +166,7 @@
         private System.Windows.Forms.Button btnStarteSpiel;
         private System.Windows.Forms.Label lblFehlerSpielername1;
         private System.Windows.Forms.Label lblFehlerSpielername2;
+        private System.Windows.Forms.Label lblTitel;
     }
 }
 
