@@ -78,10 +78,11 @@ namespace SturmfreiInHogwarts
         private void btnStarteSpiel_Click(object sender, EventArgs e)
         {
             // Grafiken aus Menü verstecken
-            lblSpielername2.Hide();
             lblSpielername1.Hide();
+            lblSpielername2.Hide();
             tbSpielername1.Hide();
             tbSpielername2.Hide();
+            lblTitel.Hide();
             btnStarteSpiel.Hide();
 
             zeigeSpielbrett();
