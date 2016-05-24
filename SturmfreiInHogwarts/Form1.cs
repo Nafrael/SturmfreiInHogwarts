@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using System.Text.RegularExpressions;
 
 namespace SturmfreiInHogwarts
 {
@@ -102,6 +103,16 @@ namespace SturmfreiInHogwarts
                     spielername1Ok = false;
                     lblFehlerSpielername1.Text = "Zu lang!";
                 }
+                else if (!spielerNameIsNichtVergeben())
+                {
+                    spielername1Ok = false;
+                    lblFehlerSpielername1.Text = "Name vergeben!";
+                }
+                else if (!spielerNameEnthaeltKeineUngueltigeZeichen(tbSpielername1.Text))
+                {
+                    spielername1Ok = false;
+                    lblFehlerSpielername1.Text = "Ungueltige Zeichen!";
+                }
                 else
                 {
                     spielername1Ok = true;
@@ -138,6 +149,16 @@ namespace SturmfreiInHogwarts
                     spielername2Ok = false;
                     lblFehlerSpielername2.Text = "Zu lang!";
                 }
+                else if (!spielerNameIsNichtVergeben())
+                {
+                    spielername2Ok = false;
+                    lblFehlerSpielername2.Text = "Name vergeben!";
+                }
+                else if (!spielerNameEnthaeltKeineUngueltigeZeichen(tbSpielername2.Text))
+                {
+                    spielername2Ok = false;
+                    lblFehlerSpielername2.Text = "Ungueltige Zeichen!";
+                }
                 else
                 {
                     spielername2Ok = true;
@@ -173,6 +194,16 @@ namespace SturmfreiInHogwarts
         private bool spielernameIstNichtZuLang(String spielername)
         {
             return spielername.Length <= 15;
+        }
+
+        private bool spielerNameIsNichtVergeben()
+        {
+            return tbSpielername1.Text != tbSpielername2.Text;
+        }
+
+        private bool spielerNameEnthaeltKeineUngueltigeZeichen(String spielername)
+        {
+            return Regex.IsMatch(spielername, "^[0-9a-z]*$") == true;
         }
 
         private bool alleSpielerNamenOk()
