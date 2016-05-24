@@ -105,6 +105,7 @@ namespace SturmfreiInHogwarts
             else
             {
                 spielername1Ok = false;
+                lblFehlerSpielername1.Text = "";
             }
 
             if (alleSpielerNamenOk())
@@ -140,6 +141,7 @@ namespace SturmfreiInHogwarts
             else
             {
                 spielername2Ok = false;
+                lblFehlerSpielername2.Text = "";
             }
 
             if (alleSpielerNamenOk())
